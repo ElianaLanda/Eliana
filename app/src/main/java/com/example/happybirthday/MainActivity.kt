@@ -12,13 +12,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.layout.Row
 import com.example.happybirthday.ui.theme.HappyBirthdayTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.ui.text.style.LineHeightStyle
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
+import androidx.compose.ui.layout.ContentScale
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +33,10 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    GreetingText(message = "Happy Birthday Aamor!", from = "De Eliana")
+                    GreetingImage(
+                        message = "Happy Birthday Sam!",
+                        from = "From Emma"
+                    )
                 }
             }
         }
@@ -51,7 +57,7 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
         )
         Text(
             text = from,
-            fontSize = 36.sp,
+            fontSize = 30.sp,
             modifier = Modifier
                 .padding(16.dp)
                 .align(alignment = Alignment.End)
@@ -61,10 +67,34 @@ fun GreetingText(message: String, from: String, modifier: Modifier = Modifier) {
 
 }
 
+@Composable
+fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier) {
+    val image = painterResource(R.drawable.androidparty)
+    Box (modifier) {
+        Image(
+            painter = image,
+            contentDescription = null,
+            contentScale = ContentScale.Crop
+        )
+        GreetingText(
+            message = message,
+            from = from,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp)
+        )
+
+    }
+
+}
+
 @Preview(showBackground = true)
 @Composable
 fun BirthdayCardPreview() {
     HappyBirthdayTheme {
-        GreetingText(message = "Happy Birthday Amor!", from = "De Eliana")
+        GreetingImage(
+            message = "Happy Birthday Eliana!",
+            from = "De Eliana para ti"
+        )
     }
 }
